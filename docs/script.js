@@ -1,18 +1,39 @@
 // Mobile sidebar toggle
 const menuToggle = document.getElementById('menu-toggle');
 const sidebar = document.getElementById('sidebar');
+const sidebarOverlay = document.getElementById('sidebar-overlay');
+
+function openSidebar() {
+  sidebar.classList.add('open');
+  if (sidebarOverlay) sidebarOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+  sidebar.classList.remove('open');
+  if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
 
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
-    sidebar.classList.toggle('open');
+    if (sidebar.classList.contains('open')) {
+      closeSidebar();
+    } else {
+      openSidebar();
+    }
   });
+}
+
+if (sidebarOverlay) {
+  sidebarOverlay.addEventListener('click', closeSidebar);
 }
 
 // Close sidebar when clicking a link (mobile)
 document.querySelectorAll('.sidebar-nav a').forEach(link => {
   link.addEventListener('click', () => {
     if (window.innerWidth <= 768) {
-      sidebar.classList.remove('open');
+      closeSidebar();
     }
   });
 });
