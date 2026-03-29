@@ -63,10 +63,13 @@ ui-context/
 ### 1. Install
 
 ```bash
-git clone https://github.com/oluizcarvalho/ui-context.git
-cd ui-context
-npm install
-npm run build
+npm install @ui-context/cli
+```
+
+Or use directly with `npx` (no install needed):
+
+```bash
+npx @ui-context/cli generate -s ./src/components -p react
 ```
 
 ### 2. Generate metadata from your component library
@@ -105,8 +108,8 @@ Copy the generated `mcp-config.json` into your tool's MCP configuration:
 {
   "mcpServers": {
     "my-design-system": {
-      "command": "node",
-      "args": ["path/to/ui-context/packages/cli/dist/index.js", "serve", "-d", "path/to/components.json"]
+      "command": "npx",
+      "args": ["-y", "@ui-context/cli", "serve", "-d", "path/to/components.json"]
     }
   }
 }
@@ -118,8 +121,8 @@ Copy the generated `mcp-config.json` into your tool's MCP configuration:
 {
   "mcpServers": {
     "my-design-system": {
-      "command": "node",
-      "args": ["path/to/ui-context/packages/cli/dist/index.js", "serve", "-d", "path/to/components.json"]
+      "command": "npx",
+      "args": ["-y", "@ui-context/cli", "serve", "-d", "path/to/components.json"]
     }
   }
 }
@@ -216,6 +219,10 @@ await startServer("./components.json");
 ## Development
 
 ```bash
+# Clone the repository
+git clone https://github.com/oluizcarvalho/ui-context.git
+cd ui-context
+
 # Install dependencies
 npm install
 
