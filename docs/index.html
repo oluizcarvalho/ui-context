@@ -232,11 +232,9 @@
 
         <div class="steps">
           <div class="step">
-            <h4>Clone and build</h4>
-            <pre><code class="language-bash">git clone https://github.com/oluizcarvalho/ui-context.git
-cd ui-context
-npm install
-npm run build</code></pre>
+            <h4>Install the CLI</h4>
+            <pre><code class="language-bash">npm install @ui-context/cli</code></pre>
+            <p>Or run directly with <code>npx</code> (no install needed).</p>
           </div>
 
           <div class="step">
@@ -275,13 +273,27 @@ npx ui-context generate -s ./path/to/components -p angular -o ./output</code></p
           <li><strong>npm</strong> (comes with Node.js)</li>
         </ul>
 
-        <h3>From source</h3>
+        <h3>From npm (recommended)</h3>
+        <pre><code class="language-bash"># Install the CLI globally
+npm install -g @ui-context/cli
+
+# Or use directly with npx (no install needed)
+npx @ui-context/cli generate -s ./src/components -p react</code></pre>
+
+        <p>You can also install individual packages:</p>
+        <pre><code class="language-bash">npm install @ui-context/core
+npm install @ui-context/parser-react
+npm install @ui-context/parser-angular
+npm install @ui-context/mcp-server</code></pre>
+
+        <h3>From source (for contributors)</h3>
         <pre><code class="language-bash">git clone https://github.com/oluizcarvalho/ui-context.git
 cd ui-context
 npm install
 npm run build</code></pre>
 
         <h3>Try with the example libraries</h3>
+        <p>After cloning the repository, you can test with the included sample libraries:</p>
         <pre><code class="language-bash"># React example
 npx ui-context generate -s ./examples/react-sample-lib/src/components -p react
 
@@ -413,9 +425,10 @@ npx ui-context generate \
         <pre><code class="language-json">{
   "mcpServers": {
     "my-design-system": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "path/to/ui-context/packages/cli/dist/index.js",
+        "-y",
+        "@ui-context/cli",
         "serve",
         "-d",
         "path/to/components.json"
@@ -429,9 +442,10 @@ npx ui-context generate \
         <pre><code class="language-json">{
   "mcpServers": {
     "my-design-system": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "path/to/ui-context/packages/cli/dist/index.js",
+        "-y",
+        "@ui-context/cli",
         "serve",
         "-d",
         "path/to/components.json"
