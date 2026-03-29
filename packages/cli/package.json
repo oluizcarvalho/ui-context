@@ -20,5 +20,19 @@
     "chalk": "^5.3.0",
     "ora": "^8.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oluizcarvalho/ui-context.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://oluizcarvalho.github.io/ui-context",
+  "bugs": {
+    "url": "https://github.com/oluizcarvalho/ui-context/issues"
+  },
+  "author": "oluizcarvalho",
+  "keywords": ["mcp", "cli", "component", "code-generation", "design-system", "ui-context"],
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT"
 }
