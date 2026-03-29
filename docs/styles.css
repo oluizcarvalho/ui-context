@@ -800,13 +800,37 @@ tr:hover td {
   transform: translateY(-2px);
 }
 
+/* ===== Table Wrapper (mobile scroll) ===== */
+.table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0;
+}
+
+.table-wrapper table {
+  margin: 0;
+}
+
 /* ===== Responsive ===== */
+
+/* Ultra-wide: expand content area */
+@media (min-width: 1440px) {
+  .main {
+    max-width: 1000px;
+    padding: 56px 80px 120px;
+  }
+  .feature-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer { padding: 32px 80px; }
+}
+
+/* Tablet */
 @media (max-width: 1024px) {
   .main { padding: 32px 32px 80px; }
   .footer { padding: 24px 32px; }
   .feature-grid { grid-template-columns: 1fr; }
 }
 
+/* Mobile */
 @media (max-width: 768px) {
   .menu-toggle { display: block; }
 
@@ -821,6 +845,7 @@ tr:hover td {
   .main {
     margin-left: 0;
     padding: 24px 20px 80px;
+    max-width: 100%;
   }
 
   .footer {
@@ -833,6 +858,52 @@ tr:hover td {
   .hero h1 { font-size: 28px; }
   .hero p { font-size: 16px; }
   .hero-actions { flex-direction: column; }
+  .hero-terminal { max-width: 100%; }
   .arch-flow { flex-direction: column; }
   .arch-arrow { transform: rotate(90deg); }
+  .arch-arrow svg { transform: rotate(90deg); }
+
+  pre { font-size: 12.5px; }
+
+  th, td { padding: 8px 10px; font-size: 12.5px; }
+  th { font-size: 11.5px; }
+
+  .back-to-top { bottom: 20px; right: 20px; width: 40px; height: 40px; }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .main { padding: 16px 14px 60px; }
+
+  .hero { padding: 32px 0 40px; }
+  .hero h1 { font-size: 24px; }
+  .hero p { font-size: 14px; }
+  .hero-badge { font-size: 11px; }
+
+  .section h2 { font-size: 22px; padding-bottom: 8px; }
+  .section h3 { font-size: 16px; }
+
+  .feature-card { padding: 16px; }
+  .feature-card .icon { width: 34px; height: 34px; }
+  .feature-card h4 { font-size: 14px; }
+
+  .step { padding-left: 40px; margin-bottom: 24px; }
+  .step::before { width: 28px; height: 28px; font-size: 12px; }
+  .step h4 { font-size: 14px; }
+
+  pre { padding: 14px 16px !important; font-size: 12px; }
+  code { font-size: 0.8em; }
+  .code-lang-label { font-size: 9px; left: 12px; }
+  .copy-btn { padding: 3px 8px; font-size: 11px; }
+
+  .terminal-body { padding: 12px 14px; font-size: 12px; }
+  .terminal-bar { padding: 8px 12px; }
+  .terminal-dot { width: 8px; height: 8px; }
+
+  .arch-diagram { padding: 20px 16px; }
+  .arch-box { padding: 12px 14px; font-size: 12px; min-width: 110px; }
+
+  .callout { padding: 12px 14px; font-size: 13px; }
+
+  .footer { padding: 16px 14px; font-size: 12px; }
 }
