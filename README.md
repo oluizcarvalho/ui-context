@@ -7,7 +7,8 @@
     <a href="#quick-start">Quick Start</a> &middot;
     <a href="#cli-commands">CLI Commands</a> &middot;
     <a href="#mcp-tools">MCP Tools</a> &middot;
-    <a href="https://oluizcarvalho.github.io/ui-context/">Documentation</a>
+    <a href="https://oluizcarvalho.github.io/ui-context/">Documentation</a> &middot;
+    <a href="https://www.npmjs.com/org/ui-context">npm</a>
   </p>
   <p align="center">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License" />
@@ -47,13 +48,15 @@ ui-context/
     └── angular-sample-lib/
 ```
 
-| Package | Description |
-|---------|-------------|
-| `@ui-context/core` | Universal component schema, parser interface, and plugin registry |
-| `@ui-context/parser-react` | Parses React components using react-docgen (TSX, JSX, TS, JS) |
-| `@ui-context/parser-angular` | Parses Angular components using ts-morph (decorators + signals) |
-| `@ui-context/mcp-server` | Creates and runs MCP servers from extracted metadata |
-| `@ui-context/cli` | CLI to generate, validate, and serve component metadata |
+| Package | Version | Description |
+|---------|---------|-------------|
+| [`@ui-context/core`](packages/core) | [![npm](https://img.shields.io/npm/v/@ui-context/core.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@ui-context/core) | Universal component schema, parser interface, and plugin registry |
+| [`@ui-context/parser-react`](packages/parser-react) | [![npm](https://img.shields.io/npm/v/@ui-context/parser-react.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@ui-context/parser-react) | Parses React components using react-docgen (TSX, JSX, TS, JS) |
+| [`@ui-context/parser-angular`](packages/parser-angular) | [![npm](https://img.shields.io/npm/v/@ui-context/parser-angular.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@ui-context/parser-angular) | Parses Angular components using ts-morph (decorators + signal APIs) |
+| [`@ui-context/mcp-server`](packages/mcp-server) | [![npm](https://img.shields.io/npm/v/@ui-context/mcp-server.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@ui-context/mcp-server) | Creates and runs MCP servers from extracted metadata |
+| [`@ui-context/cli`](packages/cli) | [![npm](https://img.shields.io/npm/v/@ui-context/cli.svg?style=flat-square&color=blue)](https://www.npmjs.com/package/@ui-context/cli) | CLI to generate, validate, and serve component metadata |
+
+> **Documentation:** [oluizcarvalho.github.io/ui-context](https://oluizcarvalho.github.io/ui-context/) &nbsp;|&nbsp; **npm:** [@ui-context](https://www.npmjs.com/org/ui-context) &nbsp;|&nbsp; **Source:** [github.com/oluizcarvalho/ui-context](https://github.com/oluizcarvalho/ui-context)
 
 ## Quick Start
 

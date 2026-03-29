@@ -211,7 +211,7 @@
           </div>
         </div>
 
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Package</th><th>Description</th></tr>
           </thead>
@@ -222,7 +222,7 @@
             <tr><td><code>@ui-context/mcp-server</code></td><td>Creates and runs MCP servers from extracted metadata</td></tr>
             <tr><td><code>@ui-context/cli</code></td><td>CLI to generate, validate, and serve component metadata</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <!-- Getting Started -->
@@ -295,7 +295,7 @@ npx ui-context generate -s ./examples/angular-sample-lib/src/components -p angul
 
         <h3><code>ui-context generate</code></h3>
         <p>Extract component metadata from source files.</p>
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Option</th><th>Description</th><th>Required</th></tr>
           </thead>
@@ -307,7 +307,7 @@ npx ui-context generate -s ./examples/angular-sample-lib/src/components -p angul
             <tr><td><code>--include &lt;patterns...&gt;</code></td><td>Glob patterns to include</td><td>No</td></tr>
             <tr><td><code>--exclude &lt;patterns...&gt;</code></td><td>Glob patterns to exclude</td><td>No</td></tr>
           </tbody>
-        </table>
+        </table></div>
 
         <pre><code class="language-bash"># Basic usage
 npx ui-context generate -s ./src/components -p react
@@ -322,25 +322,25 @@ npx ui-context generate \
 
         <h3><code>ui-context serve</code></h3>
         <p>Start an MCP server from generated metadata.</p>
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Option</th><th>Description</th><th>Required</th></tr>
           </thead>
           <tbody>
             <tr><td><code>-d, --data &lt;path&gt;</code></td><td>Path to <code>components.json</code></td><td>Yes</td></tr>
           </tbody>
-        </table>
+        </table></div>
 
         <h3><code>ui-context validate</code></h3>
         <p>Check metadata for completeness and quality issues.</p>
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Option</th><th>Description</th><th>Required</th></tr>
           </thead>
           <tbody>
             <tr><td><code>-d, --data &lt;path&gt;</code></td><td>Path to <code>components.json</code></td><td>Yes</td></tr>
           </tbody>
-        </table>
+        </table></div>
 
         <div class="callout">
           <strong>Tip:</strong> Run <code>validate</code> after <code>generate</code> to check for missing descriptions, untyped props, and missing examples.
@@ -352,7 +352,7 @@ npx ui-context generate \
         <h2>MCP Tools</h2>
         <p>Once the server is running, AI assistants can query your component library using these tools:</p>
 
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Tool</th><th>Description</th><th>Parameters</th></tr>
           </thead>
@@ -383,11 +383,11 @@ npx ui-context generate \
               <td><code>category?: string</code></td>
             </tr>
           </tbody>
-        </table>
+        </table></div>
 
         <h3>Search scoring</h3>
         <p>The <code>search_components</code> tool uses weighted matching:</p>
-        <table>
+        <div class="table-wrapper"><table>
           <thead>
             <tr><th>Match Type</th><th>Score</th></tr>
           </thead>
@@ -400,7 +400,7 @@ npx ui-context generate \
             <tr><td>Prop/event name match</td><td>+2</td></tr>
             <tr><td>Prop description match</td><td>+1</td></tr>
           </tbody>
-        </table>
+        </table></div>
       </section>
 
       <!-- Configuration -->
