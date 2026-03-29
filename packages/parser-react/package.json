@@ -1,0 +1,17 @@
+{
+  "name": "@ui-context/parser-react",
+  "version": "0.1.0",
+  "description": "React component parser for ui-context",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@ui-context/core": "0.1.0",
+    "react-docgen": "^7.0.0",
+    "glob": "^10.3.0"
+  },
+  "license": "MIT"
+}

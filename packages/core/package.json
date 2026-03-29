@@ -1,0 +1,12 @@
+{
+  "name": "@ui-context/core",
+  "version": "0.1.0",
+  "description": "Universal component schema and parser interface for ui-context",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "license": "MIT"
+}
