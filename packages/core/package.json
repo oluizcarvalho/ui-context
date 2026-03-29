@@ -1,10 +1,12 @@
 {
   "name": "@ui-context/core",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Universal component schema and parser interface for ui-context",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --build"
   },
@@ -18,7 +20,14 @@
     "url": "https://github.com/oluizcarvalho/ui-context/issues"
   },
   "author": "oluizcarvalho",
-  "keywords": ["mcp", "component", "metadata", "schema", "design-system", "parser"],
+  "keywords": [
+    "mcp",
+    "component",
+    "metadata",
+    "schema",
+    "design-system",
+    "parser"
+  ],
   "engines": {
     "node": ">=18"
   },

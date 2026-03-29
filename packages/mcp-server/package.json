@@ -1,15 +1,17 @@
 {
   "name": "@ui-context/mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "MCP Server runtime for ui-context component metadata",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc --build"
   },
   "dependencies": {
-    "@ui-context/core": "0.1.0",
+    "@ui-context/core": "0.1.2",
     "@modelcontextprotocol/sdk": "^1.12.0",
     "zod": "^3.23.0"
   },
@@ -23,7 +25,14 @@
     "url": "https://github.com/oluizcarvalho/ui-context/issues"
   },
   "author": "oluizcarvalho",
-  "keywords": ["mcp", "mcp-server", "model-context-protocol", "ai", "component", "design-system"],
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "ai",
+    "component",
+    "design-system"
+  ],
   "engines": {
     "node": ">=18"
   },
