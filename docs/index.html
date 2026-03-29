@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ui-context — Generate MCP Servers from Component Libraries</title>
+  <meta name="description" content="Extract component metadata from React and Angular libraries and expose them via MCP servers for AI-powered development tools." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="#" class="header-logo">
+        <span class="logo-icon">&lt;/&gt;</span>
+        ui-context
+      </a>
+      <div class="header-links">
+        <a href="#getting-started">Docs</a>
+        <a href="#cli-commands">CLI</a>
+        <a href="#mcp-tools">MCP Tools</a>
+        <a href="https://github.com/oluizcarvalho/ui-context" class="github-link" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- ===== Sidebar ===== -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Overview</div>
+        <div class="sidebar-nav">
+          <a href="#hero">Introduction</a>
+          <a href="#features">Features</a>
+          <a href="#architecture">Architecture</a>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Getting Started</div>
+        <div class="sidebar-nav">
+          <a href="#getting-started">Quick Start</a>
+          <a href="#installation">Installation</a>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Usage</div>
+        <div class="sidebar-nav">
+          <a href="#cli-commands">CLI Commands</a>
+          <a href="#mcp-tools">MCP Tools</a>
+          <a href="#configuration">Configuration</a>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Reference</div>
+        <div class="sidebar-nav">
+          <a href="#api">Programmatic API</a>
+          <a href="#examples">Examples</a>
+          <a href="#parsers">Parsers</a>
+        </div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Community</div>
+        <div class="sidebar-nav">
+          <a href="#contributing">Contributing</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===== Main Content ===== -->
+    <main class="main">
+
+      <!-- Hero -->
+      <div class="hero" id="hero">
+        <div class="hero-badge">MCP Server Generator</div>
+        <h1>ui-context</h1>
+        <p>Extract component metadata from your React and Angular libraries and expose them via an MCP server — giving AI assistants deep knowledge of your design system.</p>
+        <div class="hero-actions">
+          <a href="#getting-started" class="btn btn-primary">Get Started</a>
+          <a href="https://github.com/oluizcarvalho/ui-context" class="btn btn-secondary" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <section class="section" id="features">
+        <h2>Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="icon">&#9881;</span>
+            <h4>Multi-Framework</h4>
+            <p>First-class support for React and Angular with an extensible parser registry for adding new frameworks.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">&#128202;</span>
+            <h4>Universal Schema</h4>
+            <p>Framework-agnostic metadata representation — props, events, methods, slots, examples, and design tokens.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">&#129302;</span>
+            <h4>MCP Integration</h4>
+            <p>Stdio-based MCP server compatible with Claude Desktop, Cursor, and other AI-powered tools.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">&#128269;</span>
+            <h4>Intelligent Search</h4>
+            <p>Find components by name, category, props, or free-text query with relevance scoring.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">&#128214;</span>
+            <h4>Auto-Discovery</h4>
+            <p>Automatically extracts examples from Storybook stories and JSDoc tags.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon">&#127912;</span>
+            <h4>Design Tokens</h4>
+            <p>Captures colors, spacing, typography, and other design tokens from your library.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section class="section" id="architecture">
+        <h2>Architecture</h2>
+        <p>ui-context is a TypeScript monorepo with five focused packages that work together:</p>
+
+        <div class="arch-diagram">
+          <div class="arch-flow">
+            <div class="arch-box">Component Library<br><small>(React / Angular)</small></div>
+            <div class="arch-arrow">&#10132;</div>
+            <div class="arch-box accent">Parser<br><small>react-docgen / ts-morph</small></div>
+            <div class="arch-arrow">&#10132;</div>
+            <div class="arch-box purple">Core Schema<br><small>Universal Metadata</small></div>
+            <div class="arch-arrow">&#10132;</div>
+            <div class="arch-box green">MCP Server<br><small>stdio transport</small></div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr><th>Package</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>@ui-context/core</code></td><td>Universal component schema, parser interface, and plugin registry</td></tr>
+            <tr><td><code>@ui-context/parser-react</code></td><td>Parses React components using react-docgen (TSX, JSX, TS, JS)</td></tr>
+            <tr><td><code>@ui-context/parser-angular</code></td><td>Parses Angular components using ts-morph (decorators + signal APIs)</td></tr>
+            <tr><td><code>@ui-context/mcp-server</code></td><td>Creates and runs MCP servers from extracted metadata</td></tr>
+            <tr><td><code>@ui-context/cli</code></td><td>CLI to generate, validate, and serve component metadata</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Getting Started -->
+      <section class="section" id="getting-started">
+        <h2>Quick Start</h2>
+        <p>Get up and running in under 5 minutes.</p>
+
+        <div class="steps">
+          <div class="step">
+            <h4>Clone and build</h4>
+            <pre><code class="language-bash">git clone https://github.com/oluizcarvalho/ui-context.git
+cd ui-context
+npm install
+npm run build</code></pre>
+          </div>
+
+          <div class="step">
+            <h4>Generate metadata from your components</h4>
+            <pre><code class="language-bash"># React
+npx ui-context generate -s ./path/to/components -p react -o ./output
+
+# Angular
+npx ui-context generate -s ./path/to/components -p angular -o ./output</code></pre>
+            <p>This produces <code>components.json</code> (metadata) and <code>mcp-config.json</code> (config snippet).</p>
+          </div>
+
+          <div class="step">
+            <h4>Validate the output</h4>
+            <pre><code class="language-bash">npx ui-context validate -d ./output/components.json</code></pre>
+          </div>
+
+          <div class="step">
+            <h4>Start the MCP server</h4>
+            <pre><code class="language-bash">npx ui-context serve -d ./output/components.json</code></pre>
+          </div>
+
+          <div class="step">
+            <h4>Connect to your AI tool</h4>
+            <p>Copy the generated config into Claude Desktop or Cursor's MCP configuration.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section class="section" id="installation">
+        <h2>Installation</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+          <li><strong>Node.js</strong> &ge; 18</li>
+          <li><strong>npm</strong> (comes with Node.js)</li>
+        </ul>
+
+        <h3>From source</h3>
+        <pre><code class="language-bash">git clone https://github.com/oluizcarvalho/ui-context.git
+cd ui-context
+npm install
+npm run build</code></pre>
+
+        <h3>Try with the example libraries</h3>
+        <pre><code class="language-bash"># React example
+npx ui-context generate -s ./examples/react-sample-lib/src/components -p react
+
+# Angular example
+npx ui-context generate -s ./examples/angular-sample-lib/src/components -p angular</code></pre>
+      </section>
+
+      <!-- CLI Commands -->
+      <section class="section" id="cli-commands">
+        <h2>CLI Commands</h2>
+
+        <h3><code>ui-context generate</code></h3>
+        <p>Extract component metadata from source files.</p>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Description</th><th>Required</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>-s, --source &lt;path&gt;</code></td><td>Source directory with components</td><td>Yes</td></tr>
+            <tr><td><code>-p, --parser &lt;name&gt;</code></td><td>Parser to use: <code>react</code> or <code>angular</code></td><td>Yes</td></tr>
+            <tr><td><code>-o, --output &lt;path&gt;</code></td><td>Output directory</td><td>No (default: <code>./ui-context-output</code>)</td></tr>
+            <tr><td><code>--name &lt;name&gt;</code></td><td>Library name</td><td>No (defaults to dir name)</td></tr>
+            <tr><td><code>--include &lt;patterns...&gt;</code></td><td>Glob patterns to include</td><td>No</td></tr>
+            <tr><td><code>--exclude &lt;patterns...&gt;</code></td><td>Glob patterns to exclude</td><td>No</td></tr>
+          </tbody>
+        </table>
+
+        <pre><code class="language-bash"># Basic usage
+npx ui-context generate -s ./src/components -p react
+
+# With options
+npx ui-context generate \
+  -s ./src/components \
+  -p react \
+  -o ./docs/metadata \
+  --name "My Design System" \
+  --exclude "**/*.test.*" "**/__mocks__/**"</code></pre>
+
+        <h3><code>ui-context serve</code></h3>
+        <p>Start an MCP server from generated metadata.</p>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Description</th><th>Required</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>-d, --data &lt;path&gt;</code></td><td>Path to <code>components.json</code></td><td>Yes</td></tr>
+          </tbody>
+        </table>
+
+        <h3><code>ui-context validate</code></h3>
+        <p>Check metadata for completeness and quality issues.</p>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Description</th><th>Required</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>-d, --data &lt;path&gt;</code></td><td>Path to <code>components.json</code></td><td>Yes</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout">
+          <strong>Tip:</strong> Run <code>validate</code> after <code>generate</code> to check for missing descriptions, untyped props, and missing examples.
+        </div>
+      </section>
+
+      <!-- MCP Tools -->
+      <section class="section" id="mcp-tools">
+        <h2>MCP Tools</h2>
+        <p>Once the server is running, AI assistants can query your component library using these tools:</p>
+
+        <table>
+          <thead>
+            <tr><th>Tool</th><th>Description</th><th>Parameters</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>list_components</code></td>
+              <td>List all components, optionally filtered by category</td>
+              <td><code>category?: string</code></td>
+            </tr>
+            <tr>
+              <td><code>get_component</code></td>
+              <td>Get detailed metadata for a specific component</td>
+              <td><code>name: string</code></td>
+            </tr>
+            <tr>
+              <td><code>search_components</code></td>
+              <td>Search components by keyword with relevance scoring</td>
+              <td><code>query: string</code></td>
+            </tr>
+            <tr>
+              <td><code>get_usage_example</code></td>
+              <td>Get code examples for a component</td>
+              <td><code>name: string</code></td>
+            </tr>
+            <tr>
+              <td><code>get_design_tokens</code></td>
+              <td>Retrieve design tokens (colors, spacing, etc.)</td>
+              <td><code>category?: string</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Search scoring</h3>
+        <p>The <code>search_components</code> tool uses weighted matching:</p>
+        <table>
+          <thead>
+            <tr><th>Match Type</th><th>Score</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Exact name match</td><td>+20</td></tr>
+            <tr><td>Partial name match</td><td>+10</td></tr>
+            <tr><td>Selector match</td><td>+8</td></tr>
+            <tr><td>Description match</td><td>+5</td></tr>
+            <tr><td>Category match</td><td>+4</td></tr>
+            <tr><td>Prop/event name match</td><td>+2</td></tr>
+            <tr><td>Prop description match</td><td>+1</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Configuration -->
+      <section class="section" id="configuration">
+        <h2>Configuration</h2>
+        <p>After running <code>generate</code>, connect the MCP server to your AI tool.</p>
+
+        <h3>Claude Desktop</h3>
+        <p>Add to <code>~/.claude/claude_desktop_config.json</code>:</p>
+        <pre><code class="language-json">{
+  "mcpServers": {
+    "my-design-system": {
+      "command": "node",
+      "args": [
+        "path/to/ui-context/packages/cli/dist/index.js",
+        "serve",
+        "-d",
+        "path/to/components.json"
+      ]
+    }
+  }
+}</code></pre>
+
+        <h3>Cursor</h3>
+        <p>Add to <code>.cursor/mcp.json</code> in your project root:</p>
+        <pre><code class="language-json">{
+  "mcpServers": {
+    "my-design-system": {
+      "command": "node",
+      "args": [
+        "path/to/ui-context/packages/cli/dist/index.js",
+        "serve",
+        "-d",
+        "path/to/components.json"
+      ]
+    }
+  }
+}</code></pre>
+
+        <div class="callout">
+          <strong>Note:</strong> The <code>mcp-config.json</code> file generated by the <code>generate</code> command contains a ready-to-use configuration snippet. You can copy it directly into your tool's config.
+        </div>
+      </section>
+
+      <!-- Programmatic API -->
+      <section class="section" id="api">
+        <h2>Programmatic API</h2>
+        <p>Use ui-context packages directly in your TypeScript/JavaScript code.</p>
+
+        <h3>Core Schema</h3>
+        <pre><code class="language-typescript">import { ParserRegistry } from "@ui-context/core";
+import type {
+  ComponentMetadata,
+  PropMetadata,
+  EventMetadata,
+  LibraryMetadata,
+} from "@ui-context/core";</code></pre>
+
+        <h3>Using Parsers</h3>
+        <pre><code class="language-typescript">import { createParser } from "@ui-context/parser-react";
+
+const parser = createParser();
+const components = await parser.parse({
+  sourcePath: "./src/components",
+  include: ["**/*.tsx"],
+  exclude: ["**/*.test.*"],
+});</code></pre>
+
+        <h3>Creating an MCP Server</h3>
+        <pre><code class="language-typescript">import { createMcpServer, startServer } from "@ui-context/mcp-server";
+
+// From a metadata object
+const server = createMcpServer(libraryMetadata);
+
+// Or start directly from a file
+await startServer("./output/components.json");</code></pre>
+
+        <h3>Parser Registry</h3>
+        <pre><code class="language-typescript">import { ParserRegistry } from "@ui-context/core";
+
+const registry = new ParserRegistry();
+
+// Register a custom parser
+registry.register(myCustomParser);
+
+// Resolve a parser by name (supports auto-discovery)
+const parser = await registry.resolve("react");
+const components = await parser.parse({ sourcePath: "./src" });</code></pre>
+      </section>
+
+      <!-- Examples -->
+      <section class="section" id="examples">
+        <h2>Examples</h2>
+        <p>The repository includes sample component libraries to help you get started.</p>
+
+        <h3>React Example</h3>
+        <pre><code class="language-typescript">// examples/react-sample-lib/src/components/Button.tsx
+
+export interface ButtonProps {
+  /** The button label text */
+  label: string;
+  /** Visual variant */
+  variant?: "primary" | "secondary" | "danger";
+  /** Size of the button */
+  size?: "sm" | "md" | "lg";
+  /** Whether the button is disabled */
+  disabled?: boolean;
+  /** Click handler */
+  onClick?: (event: React.MouseEvent&lt;HTMLButtonElement&gt;) =&gt; void;
+}
+
+export const Button: React.FC&lt;ButtonProps&gt; = ({
+  label,
+  variant = "primary",
+  size = "md",
+  disabled = false,
+  onClick,
+}) =&gt; { /* ... */ };</code></pre>
+
+        <h3>Angular Example</h3>
+        <pre><code class="language-typescript">// examples/angular-sample-lib/src/components/button.component.ts
+
+@Component({
+  selector: "ui-button",
+  template: `
+    &lt;button [class]="variant" (click)="handleClick($event)"&gt;
+      &lt;ng-content&gt;&lt;/ng-content&gt;
+      {{ label }}
+    &lt;/button&gt;
+  `,
+})
+export class ButtonComponent {
+  @Input() label: string = "";
+  @Input() variant: "primary" | "secondary" | "danger" = "primary";
+  @Output() clicked = new EventEmitter&lt;MouseEvent&gt;();
+
+  focus(): void { /* ... */ }
+}</code></pre>
+
+        <h3>Running the examples</h3>
+        <pre><code class="language-bash"># Parse the React sample library
+npx ui-context generate \
+  -s ./examples/react-sample-lib/src/components \
+  -p react \
+  --name "React Sample Lib"
+
+# Parse the Angular sample library
+npx ui-context generate \
+  -s ./examples/angular-sample-lib/src/components \
+  -p angular \
+  --name "Angular Sample Lib"
+
+# Validate the output
+npx ui-context validate -d ./ui-context-output/components.json
+
+# Start the MCP server
+npx ui-context serve -d ./ui-context-output/components.json</code></pre>
+      </section>
+
+      <!-- Parsers -->
+      <section class="section" id="parsers">
+        <h2>Parsers</h2>
+
+        <h3>React Parser</h3>
+        <p>Uses <strong>react-docgen</strong> to analyze React components:</p>
+        <ul>
+          <li>Supported extensions: <code>.tsx</code>, <code>.jsx</code>, <code>.ts</code>, <code>.js</code></li>
+          <li>Extracts props from TypeScript interfaces and PropTypes</li>
+          <li>Props starting with <code>on</code> + uppercase letter are classified as events</li>
+          <li>Discovers examples from <code>.stories.tsx</code> files and <code>@example</code> JSDoc tags</li>
+          <li>Ignores test, spec, and story files by default</li>
+        </ul>
+
+        <h3>Angular Parser</h3>
+        <p>Uses <strong>ts-morph</strong> for TypeScript AST analysis:</p>
+        <ul>
+          <li>Parses <code>@Component</code> and <code>@Directive</code> decorators</li>
+          <li>Extracts <code>@Input()</code> and <code>@Output()</code> metadata</li>
+          <li>Supports Angular 14+ signal APIs (<code>input()</code>, <code>output()</code>)</li>
+          <li>Extracts <code>&lt;ng-content&gt;</code> slots from templates</li>
+          <li>Filters lifecycle hooks (ngOnInit, ngOnDestroy, etc.)</li>
+          <li>Ignores spec, module, and routing files by default</li>
+        </ul>
+
+        <h3>Custom Parsers</h3>
+        <p>Implement the <code>ComponentParser</code> interface to add support for other frameworks:</p>
+        <pre><code class="language-typescript">import type { ComponentParser, ParserOptions, ComponentMetadata } from "@ui-context/core";
+
+export class VueParser implements ComponentParser {
+  name = "vue";
+  supportedExtensions = [".vue"];
+
+  async parse(options: ParserOptions): Promise&lt;ComponentMetadata[]&gt; {
+    // Your parsing logic here
+  }
+}</code></pre>
+      </section>
+
+      <!-- Contributing -->
+      <section class="section" id="contributing">
+        <h2>Contributing</h2>
+        <ol>
+          <li>Fork the repository</li>
+          <li>Create your feature branch: <code>git checkout -b feature/amazing-feature</code></li>
+          <li>Write tests for your changes</li>
+          <li>Commit your changes: <code>git commit -m 'Add amazing feature'</code></li>
+          <li>Push to the branch: <code>git push origin feature/amazing-feature</code></li>
+          <li>Open a Pull Request</li>
+        </ol>
+
+        <h3>Development setup</h3>
+        <pre><code class="language-bash"># Install dependencies
+npm install
+
+# Build all packages
+npm run build
+
+# Run tests
+npm test
+
+# Watch mode
+npm run test:watch</code></pre>
+
+        <div class="callout">
+          <strong>License:</strong> This project is licensed under the MIT License.
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>Built with care. MIT License.</span>
+    <a href="https://github.com/oluizcarvalho/ui-context" target="_blank" rel="noopener">github.com/oluizcarvalho/ui-context</a>
+  </footer>
+
+  <!-- Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
