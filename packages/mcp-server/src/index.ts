@@ -18,10 +18,12 @@ export async function startServer(metadataPath: string): Promise<void> {
 }
 
 // Allow running directly: node dist/index.js <path-to-components.json>
-const metadataArg = process.argv[2];
-if (metadataArg) {
-  startServer(metadataArg).catch((err) => {
-    console.error("Failed to start MCP server:", err);
-    process.exit(1);
-  });
+if (require.main === module) {
+  const metadataArg = process.argv[2];
+  if (metadataArg) {
+    startServer(metadataArg).catch((err) => {
+      console.error("Failed to start MCP server:", err);
+      process.exit(1);
+    });
+  }
 }
