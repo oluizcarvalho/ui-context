@@ -440,6 +440,20 @@ npx ui-context generate \
   }
 }</code></pre>
 
+        <h3>Claude CLI (Claude Code)</h3>
+        <p>Use the <code>claude mcp add</code> command to register the server directly from your terminal — no manual JSON editing required:</p>
+        <pre><code class="language-bash"># Add for the current project only (project scope, default)
+claude mcp add my-design-system \
+  -- npx -y @ui-context/cli serve -d path/to/components.json
+
+# Add globally for all projects
+claude mcp add --scope global my-design-system \
+  -- npx -y @ui-context/cli serve -d path/to/components.json</code></pre>
+        <p>Verify it was registered:</p>
+        <pre><code class="language-bash">claude mcp list</code></pre>
+        <p>Remove it when no longer needed:</p>
+        <pre><code class="language-bash">claude mcp remove my-design-system</code></pre>
+
         <h3>Cursor</h3>
         <p>Add to <code>.cursor/mcp.json</code> in your project root:</p>
         <pre><code class="language-json">{

@@ -98,9 +98,17 @@ npx ui-context validate -d ./output/components.json
 npx ui-context serve -d ./output/components.json
 ```
 
-### 5. Connect to Claude Desktop or Cursor
+### 5. Connect to your AI tool
 
-Copy the generated `mcp-config.json` into your tool's MCP configuration:
+**Claude CLI (Claude Code)** — register via terminal, no JSON editing needed:
+
+```bash
+# Project scope (default)
+claude mcp add my-design-system -- npx -y @ui-context/cli serve -d path/to/components.json
+
+# Global scope
+claude mcp add --scope global my-design-system -- npx -y @ui-context/cli serve -d path/to/components.json
+```
 
 **Claude Desktop** (`~/.claude/claude_desktop_config.json`):
 

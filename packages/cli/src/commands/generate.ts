@@ -96,9 +96,11 @@ export function registerGenerateCommand(program: Command): void {
         console.log(`  1. Start the MCP server:`);
         console.log(chalk.cyan(`     ui-context serve --data ${metadataPath}`));
         console.log("");
-        console.log(`  2. Or add to your editor's MCP config (Claude Desktop, Cursor, etc.):`);
-        console.log(chalk.cyan(`     Copy the contents of ${configPath}`));
-        console.log(`     into your claude_desktop_config.json or .cursor/mcp.json`);
+        console.log(`  2. Add to Claude CLI (Claude Code):`);
+        console.log(chalk.cyan(`     claude mcp add ${libraryName} -- npx -y @ui-context/cli serve -d ${metadataPath}`));
+        console.log("");
+        console.log(`  3. Or add to Claude Desktop / Cursor (copy ${path.basename(configPath)}):`);
+        console.log(chalk.cyan(`     ${configPath}`));
         console.log("");
         console.log(
           chalk.dim(
