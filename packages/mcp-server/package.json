@@ -1,6 +1,6 @@
 {
   "name": "@ui-context/mcp-server",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "MCP Server runtime for ui-context component metadata",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,7 @@
     "build": "tsc --build"
   },
   "dependencies": {
-    "@ui-context/core": "0.1.3",
+    "@ui-context/core": "0.1.4",
     "@modelcontextprotocol/sdk": "^1.12.0",
     "zod": "^3.23.0"
   },
